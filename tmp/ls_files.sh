@@ -1,0 +1,1 @@
+cd / && git ls-files 2>&1

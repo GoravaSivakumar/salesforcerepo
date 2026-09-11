@@ -1,0 +1,1 @@
+cd / && git status 2>&1
