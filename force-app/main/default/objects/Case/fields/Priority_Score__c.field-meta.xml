@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Priority_Score__c</fullName>
+    <label>Priority Score</label>
+    <description>Numeric representation of the Priority_Level__c picklist: Low=1, Medium=2, High=3, Critical=4. Used for reporting and calculations.</description>
+    <inlineHelpText>Automatically calculated from Priority Level: Low=1, Medium=2, High=3, Critical=4.</inlineHelpText>
+    <type>Number</type>
+    <precision>1</precision>
+    <scale>0</scale>
+    <formula>CASE(Priority_Level__c, &quot;Low&quot;, 1, &quot;Medium&quot;, 2, &quot;High&quot;, 3, &quot;Critical&quot;, 4, 0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+</CustomField>
