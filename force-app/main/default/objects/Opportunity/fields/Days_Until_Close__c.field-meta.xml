@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Days_Until_Close__c</fullName>
+    <label>Days Until Close</label>
+    <description>Calculates the number of days remaining until the opportunity closes. A negative value indicates the close date has passed.</description>
+    <inlineHelpText>This field automatically shows the number of days remaining until the opportunity Close Date. A negative number means the Close Date has already passed. Use this field to prioritize follow-ups and track urgency.</inlineHelpText>
+    <type>Number</type>
+    <precision>18</precision>
+    <scale>0</scale>
+    <formula><![CDATA[TODAY() - CloseDate]]></formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+</CustomField>
