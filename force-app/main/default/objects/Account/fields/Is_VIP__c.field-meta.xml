@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_VIP__c</fullName>
+    <label>Is VIP</label>
+    <description>Indicates whether the Account is a VIP customer. VIP customers may receive special treatment, priority support, or exclusive offers.</description>
+    <inlineHelpText>Check this box if the account is considered a VIP customer. VIP status is used to determine eligibility for priority support and special programs.</inlineHelpText>
+    <defaultValue>false</defaultValue>
+    <type>Checkbox</type>
+</CustomField>
