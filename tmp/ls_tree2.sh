@@ -1,0 +1,1 @@
+cd / && export GIT_DIR=/.git && git ls-tree --name-only -r HEAD 2>&1
