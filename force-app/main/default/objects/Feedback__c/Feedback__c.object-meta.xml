@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Feedback</label>
+    <pluralLabel>Feedback</pluralLabel>
+    <sharingModel>ReadWrite</sharingModel>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <visibility>Public</visibility>
+    <description>The Feedback object tracks customer and stakeholder feedback submissions. It captures feedback details and includes Status (New/In Progress/Resolved/Closed) and Priority (Low/Medium/High/Critical). Commonly used for collecting product feedback, bug reports, and feature requests.</description>
+    <nameField>
+        <label>Feedback Subject</label>
+        <type>Text</type>
+    </nameField>
+</CustomObject>
