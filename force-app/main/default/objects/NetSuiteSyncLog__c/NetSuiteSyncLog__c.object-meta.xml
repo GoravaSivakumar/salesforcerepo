@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>NetSuite Sync Log</label>
+    <pluralLabel>NetSuite Sync Logs</pluralLabel>
+    <sharingModel>ReadWrite</sharingModel>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <visibility>Public</visibility>
+    <description>Tracks synchronization records between Salesforce and NetSuite, including sync status, timestamps, error details, and source record identifiers for bidirectional data exchange.</description>
+    <nameField>
+        <label>Sync Log Name</label>
+        <type>Text</type>
+    </nameField>
+    <fields>
+        <fullName>SyncStatus__c</fullName>
+        <label>Sync Status</label>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pending</fullName>
+                    <default>true</default>
+                    <label>Pending</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Success</fullName>
+                    <default>false</default>
+                    <label>Success</label>
+                </value>
+                <value>
+                    <fullName>Failed</fullName>
+                    <default>false</default>
+                    <label>Failed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SyncDirection__c</fullName>
+        <label>Sync Direction</label>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Salesforce to NetSuite</fullName>
+                    <default>true</default>
+                    <label>Salesforce to NetSuite</label>
+                </value>
+                <value>
+                    <fullName>NetSuite to Salesforce</fullName>
+                    <default>false</default>
+                    <label>NetSuite to Salesforce</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SourceRecordId__c</fullName>
+        <label>Source Record ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <length>255</length>
+    </fields>
+    <fields>
+        <fullName>TargetRecordId__c</fullName>
+        <label>Target Record ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <length>255</length>
+    </fields>
+    <fields>
+        <fullName>ErrorMessage__c</fullName>
+        <label>Error Message</label>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+        <length>32768</length>
+    </fields>
+    <fields>
+        <fullName>SyncedDateTime__c</fullName>
+        <label>Synced Date/Time</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ObjectType__c</fullName>
+        <label>Object Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <length>100</length>
+    </fields>
+</CustomObject>
