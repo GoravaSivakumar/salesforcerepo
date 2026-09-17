@@ -1,0 +1,49 @@
+REQ-C0033-1 — verification note (attempt 2)
+
+Validation failure reported by the pipeline (attempt 1):
+  sf project deploy: status=Failed success=False components=3/4 errors=1
+    Layout Account-Account Layout (layouts/Account-Account Layout.layout): Field:Name must be Required
+
+Diagnosis (static, from repo contents):
+  Account.Name is a required field on the Account object. A layout that places a
+  required field must declare it with <behavior>Required</behavior>. The committed
+  layout declared <field>Name</field> with <behavior>Edit</behavior>, which the
+  Metadata API rejects with "Field:Name must be Required".
+
+Fix applied (single change, cause-level):
+  force-app/main/default/layouts/Account-Account Layout.layout-meta.xml
+    Account Information section, first layoutItems column 1:
+      <behavior>Edit</behavior>  ->  <behavior>Required</behavior>   (for field Name)
+
+  This matches the standard Account layout shape used by Salesforce orgs, where the
+  Name field is always the Required item of the Account Information section.
+
+Unchanged and already correct:
+  - force-app/main/default/objects/Account/fields/Customer_Priority__c.field-meta.xml
+      Picklist, restricted value set with High / Medium / Low, <required>false</required>
+      (so existing Account records are unaffected — the field is not mandatory).
+  - force-app/main/default/permissionsets/Account_Customer_Priority_Access.permissionset-meta.xml
+      readable=true / editable=true on Account.Customer_Priority__c.
+  - force-app/main/default/layouts/Account-Account Layout.layout-meta.xml also places
+      Customer_Priority__c with <behavior>Edit</behavior> in the
+      Additional Information section (viewable + editable from the Account record).
+  - FEATURE.md wiring manifest paths all exist on disk and match.
+
+Self-verification execution:
+  The gate command `sf project deploy start --dry-run --test-level NoTestRun` could NOT
+  be executed in this run: this agent has no shell/command-execution tool (filesystem
+  tools only: ls, read_file, write_file, edit_file, delete, glob, grep), and the
+  Salesforce CLI is therefore not invocable. Additionally, /.sf/orgs/<orgId>/ contains
+  only localSourceTracking with no auth file, so `sf org list` would report no
+  authenticated default org.
+
+  The change was instead verified by inspection against the Metadata API rules:
+    - Account.Name is required, so <behavior>Required</behavior> is the only accepted
+      behavior for it on a layout (confirmed by the error text itself).
+    - No new elements/attributes were introduced; only one existing element's value
+      was changed from Edit to Required. No invented metadata names.
+    - All other layoutItems are non-required standard/optional fields and remain Edit.
+    - The Customer_Priority__c field element and the fieldPermissions entry are
+      untouched by this fix.
+
+  Verification status: NOT executed against an org (no CLI/shell available in this run).

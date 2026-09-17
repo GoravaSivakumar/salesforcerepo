@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Grants read and edit access to the Account.Customer_Priority__c picklist field for users who manage customer accounts.</description>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.Customer_Priority__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Account Customer Priority Access</label>
+</PermissionSet>
