@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Amount_Required</fullName>
+    <active>true</active>
+    <description>Amount is required and must be greater than zero.</description>
+    <errorConditionFormula><![CDATA[OR(ISBLANK(Amount), Amount <= 0)]]></errorConditionFormula>
+    <errorDisplayField>Amount</errorDisplayField>
+    <errorMessage>Opportunity Amount must be greater than 0</errorMessage>
+</ValidationRule>
