@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <assignments>
+        <name>Set_Description_Customer_Account_Created</name>
+        <label>Set Description to Customer Account Created</label>
+        <locationX>352</locationX>
+        <locationY>134</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Customer Account Created</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Account_Type_Is_Customer_Direct</name>
+        <label>Account Type Is Customer - Direct</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Customer_Direct</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Customer - Direct</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Description_Customer_Account_Created</targetReference>
+            </connector>
+            <label>Customer - Direct</label>
+        </rules>
+    </decisions>
+    <description>Before-save record-triggered Flow on Account. When an Account is created with Type Customer - Direct, Description is set to Customer Account Created. Other Types are unchanged.</description>
+    <label>Account - Set Description For Customer - Direct</label>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Account_Type_Is_Customer_Direct</targetReference>
+        </connector>
+        <object>Account</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
