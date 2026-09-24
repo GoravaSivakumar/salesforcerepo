@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_Critical_No_High_Priority</fullName>
+    <active>true</active>
+    <errorConditionFormula><![CDATA[
+AND(
+    ISPICKVAL(Priority_Level__c, "Critical"),
+    NOT(OR(
+        ISPICKVAL(Priority, "High"),
+        ISPICKVAL(Priority, "Highest")
+    ))
+)
+    ]]></errorConditionFormula>
+    <errorMessage>To set Priority Level to Critical, the Case Priority field must be set to High or Highest.</errorMessage>
+</ValidationRule>
