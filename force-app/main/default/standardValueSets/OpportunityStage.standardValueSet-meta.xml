@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OpportunityStage</fullName>
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Qualification</fullName>
+        <default>true</default>
+        <label>Qualification</label>
+        <probability>10</probability>
+        <isActive>true</isActive>
+    </standardValue>
+    <standardValue>
+        <fullName>Need Analysis</fullName>
+        <default>false</default>
+        <label>Need Analysis</label>
+        <probability>20</probability>
+        <isActive>true</isActive>
+    </standardValue>
+    <standardValue>
+        <fullName>Proposal</fullName>
+        <default>false</default>
+        <label>Proposal</label>
+        <probability>50</probability>
+        <isActive>true</isActive>
+    </standardValue>
+    <standardValue>
+        <fullName>Negotiation</fullName>
+        <default>false</default>
+        <label>Negotiation</label>
+        <probability>75</probability>
+        <isActive>true</isActive>
+    </standardValue>
+    <standardValue>
+        <fullName>Closed Won</fullName>
+        <default>false</default>
+        <label>Closed Won</label>
+        <probability>100</probability>
+        <isActive>true</isActive>
+    </standardValue>
+    <standardValue>
+        <fullName>Closed Lost</fullName>
+        <default>false</default>
+        <label>Closed Lost</label>
+        <probability>0</probability>
+        <isActive>true</isActive>
+    </standardValue>
+</StandardValueSet>
