@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Age_Days__c</fullName>
+    <label>Account Age (Days)</label>
+    <description>Number of whole days since the Account was created, computed as the difference between the current date and the account&apos;s CreatedDate.</description>
+    <inlineHelpText>Displays the number of whole days between the Account&apos;s CreatedDate and today.</inlineHelpText>
+    <precision>18</precision>
+    <scale>0</scale>
+    <type>Number</type>
+    <formula><![CDATA[TODAY() - DATEVALUE(CreatedDate)]]></formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+</CustomField>
