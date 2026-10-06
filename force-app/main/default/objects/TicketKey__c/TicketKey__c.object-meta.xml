@@ -2,6 +2,11 @@
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <deploymentStatus>Deployed</deploymentStatus>
     <description>The TicketKey object tracks ticket identifiers used to key and reference support tickets. It captures the Ticket Price text field for recording the price of a ticket. Commonly used for ticket tracking, price lookup, and support reference management.</description>
+    <enableActivities>true</enableActivities>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
     <label>TicketKey</label>
     <nameField>
         <label>TicketKey Name</label>

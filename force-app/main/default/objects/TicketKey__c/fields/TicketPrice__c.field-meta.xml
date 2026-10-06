@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>TicketPrice__c</fullName>
     <description>The price of the ticket, stored as text.</description>
+    <inlineHelpText>Enter the ticket price as text, for example 150.00.</inlineHelpText>
     <label>TicketPrice</label>
     <length>255</length>
     <type>Text</type>
