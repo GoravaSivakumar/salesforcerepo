@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Stage_Regression</fullName>
+    <active>true</active>
+    <errorConditionFormula><![CDATA[
+AND(
+    ISCHANGED(StageName),
+    CASE(StageName,
+        "Qualification", 0,
+        "Needs Analysis", 1,
+        "Proposal", 2,
+        "Negotiation", 3,
+        "Closed Won", 4,
+        -1
+    ) <
+    CASE(PRIORVALUE(StageName),
+        "Qualification", 0,
+        "Needs Analysis", 1,
+        "Proposal", 2,
+        "Negotiation", 3,
+        "Closed Won", 4,
+        -1
+    )
+)
+]]></errorConditionFormula>
+    <errorMessage>Stage cannot be moved backward. The new stage must come after the current stage in the sales process.</errorMessage>
+</ValidationRule>
