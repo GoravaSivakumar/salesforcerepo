@@ -1,0 +1,1 @@
+cd / && /usr/bin/git log --oneline -5 2>&1; echo "EXIT:$?"

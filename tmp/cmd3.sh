@@ -1,0 +1,1 @@
+cd / && git branch -a 2>&1

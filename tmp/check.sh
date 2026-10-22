@@ -1,0 +1,1 @@
+cd / && which git && git --version

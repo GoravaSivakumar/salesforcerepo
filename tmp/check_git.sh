@@ -1,0 +1,2 @@
+which git
+git --version

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Custom_Field_722__c</fullName>
+    <label>Custom Field 722</label>
+    <type>Text</type>
+    <length>255</length>
+    <description>Custom field for Product2 object.</description>
+    <inlineHelpText>Enter a value for Custom Field 722.</inlineHelpText>
+</CustomField>

@@ -1,0 +1,1 @@
+cd / && echo "=== 1. git log --oneline -10 ===" && git log --oneline -10 && echo "" && echo "=== 2. git status ===" && git status && echo "" && echo "=== 3. git branch -a ===" && git branch -a && echo "" && echo "=== 4. git show --name-only --format='' HEAD (only 1 commit, so HEAD~1 doesn't exist) ===" && git show --name-only --format="" HEAD

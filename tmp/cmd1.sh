@@ -1,0 +1,1 @@
+cd / && git log --oneline -10 2>&1

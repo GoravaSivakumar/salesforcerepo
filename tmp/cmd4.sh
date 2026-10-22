@@ -1,0 +1,1 @@
+cd / && (git diff HEAD~1 --name-only 2>&1 || git show --name-only --format="" HEAD~1 2>&1)

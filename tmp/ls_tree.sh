@@ -1,0 +1,1 @@
+cd / && git ls-tree -r --name-only HEAD 2>&1

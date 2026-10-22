@@ -1,0 +1,1 @@
+cd / && git log --oneline -10 2>&1 && echo "---" && git status 2>&1 && echo "---" && git branch -a 2>&1 && echo "---" && git show --name-only --format="" HEAD 2>&1
