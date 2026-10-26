@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Workflow_Eval_Parallel_Tag_20261026__c</fullName>
+    <label>Workflow Eval Parallel Tag 20261026</label>
+    <description>Independent smoke-test field used to validate the parallel Strategy1 workflow evaluation (ticket STRATEGY1-EVAL-PARALLEL-FIELD-20261026-04). Holds no business meaning.</description>
+    <inlineHelpText>Test tag for workflow evaluation only. Leave blank on business Account records.</inlineHelpText>
+    <length>80</length>
+    <required>false</required>
+    <type>Text</type>
+</CustomField>
