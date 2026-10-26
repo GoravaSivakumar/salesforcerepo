@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Workflow_Eval_Smoke_Tag_20261026__c</fullName>
+    <label>Workflow Eval Smoke Tag 20261026</label>
+    <description>Disposable text field used to exercise the Strategy1 workflow evaluation pipeline (ticket STRATEGY1-EVAL-FIELD-20261026-02). Not part of the business data model; safe to remove once the evaluation is complete.</description>
+    <inlineHelpText>Optional disposable smoke-test tag. Leave blank unless instructed by the workflow evaluation team.</inlineHelpText>
+    <length>80</length>
+    <type>Text</type>
+</CustomField>
