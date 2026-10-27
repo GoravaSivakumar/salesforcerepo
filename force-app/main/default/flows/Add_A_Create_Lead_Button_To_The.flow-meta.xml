@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+  <apiVersion>65.0</apiVersion>
+  <assignments>
+    <name>Handle_Create_Lead_Fault</name>
+    <label>Handle Create Lead Fault</label>
+    <locationX>100</locationX>
+    <locationY>550</locationY>
+    <assignmentItems>
+      <assignToReference>var_ErrorMessage</assignToReference>
+      <operator>Assign</operator>
+      <value>
+        <elementReference>$Flow.FaultMessage</elementReference>
+      </value>
+    </assignmentItems>
+    <connector>
+      <targetReference>Screen_Error</targetReference>
+    </connector>
+  </assignments>
+  <choices>
+    <name>LeadSource_Other</name>
+    <choiceText>Other</choiceText>
+    <dataType>String</dataType>
+    <value>
+      <stringValue>Other</stringValue>
+    </value>
+  </choices>
+  <choices>
+    <name>LeadSource_Partner_Referral</name>
+    <choiceText>Partner Referral</choiceText>
+    <dataType>String</dataType>
+    <value>
+      <stringValue>Partner Referral</stringValue>
+    </value>
+  </choices>
+  <choices>
+    <name>LeadSource_Phone_Inquiry</name>
+    <choiceText>Phone Inquiry</choiceText>
+    <dataType>String</dataType>
+    <value>
+      <stringValue>Phone Inquiry</stringValue>
+    </value>
+  </choices>
+  <choices>
+    <name>LeadSource_Purchased_List</name>
+    <choiceText>Purchased List</choiceText>
+    <dataType>String</dataType>
+    <value>
+      <stringValue>Purchased List</stringValue>
+    </value>
+  </choices>
+  <choices>
+    <name>LeadSource_Web</name>
+    <choiceText>Web</choiceText>
+    <dataType>String</dataType>
+    <value>
+      <stringValue>Web</stringValue>
+    </value>
+  </choices>
+  <choices>
+    <name>ProductInterest_GC1000</name>
+    <choiceText>GC1000 series</choiceText>
+    <dataType>String</dataType>
+    <value>
+      <stringValue>GC1000 series</stringValue>
+    </value>
+  </choices>
+  <choices>
+    <name>ProductInterest_GC3000</name>
+    <choiceText>GC3000 series</choiceText>
+    <dataType>String</dataType>
+    <value>
+      <stringValue>GC3000 series</stringValue>
+    </value>
+  </choices>
+  <choices>
+    <name>ProductInterest_GC5000</name>
+    <choiceText>GC5000 series</choiceText>
+    <dataType>String</dataType>
+    <value>
+      <stringValue>GC5000 series</stringValue>
+    </value>
+  </choices>
+  <choices>
+    <name>Rating_Cold</name>
+    <choiceText>Cold</choiceText>
+    <dataType>String</dataType>
+    <value>
+      <stringValue>Cold</stringValue>
+    </value>
+  </choices>
+  <choices>
+    <name>Rating_Hot</name>
+    <choiceText>Hot</choiceText>
+    <dataType>String</dataType>
+    <value>
+      <stringValue>Hot</stringValue>
+    </value>
+  </choices>
+  <choices>
+    <name>Rating_Warm</name>
+    <choiceText>Warm</choiceText>
+    <dataType>String</dataType>
+    <value>
+      <stringValue>Warm</stringValue>
+    </value>
+  </choices>
+  <choices>
+    <name>Status_Closed_Converted</name>
+    <choiceText>Closed - Converted</choiceText>
+    <dataType>String</dataType>
+    <value>
+      <stringValue>Closed - Converted</stringValue>
+    </value>
+  </choices>
+  <choices>
+    <name>Status_Closed_Not_Converted</name>
+    <choiceText>Closed - Not Converted</choiceText>
+    <dataType>String</dataType>
+    <value>
+      <stringValue>Closed - Not Converted</stringValue>
+    </value>
+  </choices>
+  <choices>
+    <name>Status_New_Not_Contacted</name>
+    <choiceText>New - Not Contacted</choiceText>
+    <dataType>String</dataType>
+    <value>
+      <stringValue>New - Not Contacted</stringValue>
+    </value>
+  </choices>
+  <choices>
+    <name>Status_Nurturing_Contacted</name>
+    <choiceText>Nurturing - Contacted</choiceText>
+    <dataType>String</dataType>
+    <value>
+      <stringValue>Nurturing - Contacted</stringValue>
+    </value>
+  </choices>
+  <choices>
+    <name>Status_Working_Contacted</name>
+    <choiceText>Working - Contacted</choiceText>
+    <dataType>String</dataType>
+    <value>
+      <stringValue>Working - Contacted</stringValue>
+    </value>
+  </choices>
+  <description>Creates a Lead from the Leads list with required Last Name and Company fields, validates that Email or Phone is provided, and applies the visible default Status and Rating values.</description>
+  <label>Create Lead From Leads List</label>
+  <processType>Flow</processType>
+  <recordCreates>
+    <name>Create_Lead</name>
+    <label>Create Lead</label>
+    <locationX>100</locationX>
+    <locationY>400</locationY>
+    <connector>
+      <targetReference>Screen_Complete</targetReference>
+    </connector>
+    <faultConnector>
+      <targetReference>Handle_Create_Lead_Fault</targetReference>
+    </faultConnector>
+    <inputAssignments>
+      <field>FirstName</field>
+      <value>
+        <elementReference>Screen_Create_Lead.First_Name</elementReference>
+      </value>
+    </inputAssignments>
+    <inputAssignments>
+      <field>LastName</field>
+      <value>
+        <elementReference>Screen_Create_Lead.Last_Name</elementReference>
+      </value>
+    </inputAssignments>
+    <inputAssignments>
+      <field>Company</field>
+      <value>
+        <elementReference>Screen_Create_Lead.Company</elementReference>
+      </value>
+    </inputAssignments>
+    <inputAssignments>
+      <field>Email</field>
+      <value>
+        <elementReference>Screen_Create_Lead.Email</elementReference>
+      </value>
+    </inputAssignments>
+    <inputAssignments>
+      <field>LeadSource</field>
+      <value>
+        <elementReference>Screen_Create_Lead.Lead_Source</elementReference>
+      </value>
+    </inputAssignments>
+    <inputAssignments>
+      <field>MobilePhone</field>
+      <value>
+        <elementReference>Screen_Create_Lead.Mobile_Phone</elementReference>
+      </value>
+    </inputAssignments>
+    <inputAssignments>
+      <field>Phone</field>
+      <value>
+        <elementReference>Screen_Create_Lead.Phone</elementReference>
+      </value>
+    </inputAssignments>
+    <inputAssignments>
+      <field>ProductInterest__c</field>
+      <value>
+        <elementReference>Screen_Create_Lead.Product_Service_Interest</elementReference>
+      </value>
+    </inputAssignments>
+    <inputAssignments>
+      <field>Rating</field>
+      <value>
+        <elementReference>Screen_Create_Lead.Rating</elementReference>
+      </value>
+    </inputAssignments>
+    <inputAssignments>
+      <field>Description</field>
+      <value>
+        <elementReference>Screen_Create_Lead.Description</elementReference>
+      </value>
+    </inputAssignments>
+    <inputAssignments>
+      <field>Status</field>
+      <value>
+        <elementReference>Screen_Create_Lead.Status</elementReference>
+      </value>
+    </inputAssignments>
+    <object>Lead</object>
+    <storeOutputAutomatically>true</storeOutputAutomatically>
+  </recordCreates>
+  <runInMode>DefaultMode</runInMode>
+  <screens>
+    <name>Screen_Complete</name>
+    <label>Lead Created</label>
+    <locationX>100</locationX>
+    <locationY>550</locationY>
+    <allowBack>false</allowBack>
+    <allowFinish>true</allowFinish>
+    <allowPause>false</allowPause>
+    <fields>
+      <name>Complete_Message</name>
+      <fieldType>DisplayText</fieldType>
+      <fieldText>&lt;p&gt;&lt;b&gt;Lead created successfully.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Finish this flow to close it and return to the Leads list.&lt;/p&gt;</fieldText>
+    </fields>
+    <showFooter>true</showFooter>
+    <showHeader>true</showHeader>
+  </screens>
+  <screens>
+    <name>Screen_Create_Lead</name>
+    <label>Create Lead Details</label>
+    <locationX>100</locationX>
+    <locationY>250</locationY>
+    <allowBack>false</allowBack>
+    <allowFinish>true</allowFinish>
+    <allowPause>false</allowPause>
+    <connector>
+      <targetReference>Create_Lead</targetReference>
+    </connector>
+    <fields>
+      <name>Lead_Instructions</name>
+      <fieldType>DisplayText</fieldType>
+      <fieldText>&lt;p&gt;Enter the lead details. Last Name and Company are required. Provide an Email address, a Phone number, or both.&lt;/p&gt;</fieldText>
+    </fields>
+    <fields>
+      <name>First_Name</name>
+      <dataType>String</dataType>
+      <fieldText>First Name</fieldText>
+      <fieldType>InputField</fieldType>
+      <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+      <isRequired>false</isRequired>
+    </fields>
+    <fields>
+      <name>Last_Name</name>
+      <dataType>String</dataType>
+      <fieldText>Last Name</fieldText>
+      <fieldType>InputField</fieldType>
+      <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+      <isRequired>true</isRequired>
+    </fields>
+    <fields>
+      <name>Company</name>
+      <dataType>String</dataType>
+      <fieldText>Company</fieldText>
+      <fieldType>InputField</fieldType>
+      <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+      <isRequired>true</isRequired>
+    </fields>
+    <fields>
+      <name>Email</name>
+      <dataType>String</dataType>
+      <fieldText>Email</fieldText>
+      <fieldType>InputField</fieldType>
+      <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+      <isRequired>false</isRequired>
+    </fields>
+    <fields>
+      <name>Lead_Source</name>
+      <choiceReferences>LeadSource_Web</choiceReferences>
+      <choiceReferences>LeadSource_Phone_Inquiry</choiceReferences>
+      <choiceReferences>LeadSource_Partner_Referral</choiceReferences>
+      <choiceReferences>LeadSource_Purchased_List</choiceReferences>
+      <choiceReferences>LeadSource_Other</choiceReferences>
+      <dataType>String</dataType>
+      <fieldText>Lead Source</fieldText>
+      <fieldType>DropdownBox</fieldType>
+      <isRequired>false</isRequired>
+    </fields>
+    <fields>
+      <name>Mobile_Phone</name>
+      <dataType>String</dataType>
+      <fieldText>Mobile Phone</fieldText>
+      <fieldType>InputField</fieldType>
+      <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+      <isRequired>false</isRequired>
+    </fields>
+    <fields>
+      <name>Phone</name>
+      <dataType>String</dataType>
+      <fieldText>Phone</fieldText>
+      <fieldType>InputField</fieldType>
+      <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+      <isRequired>false</isRequired>
+      <validationRule>
+        <errorMessage>Enter an Email address, a Phone number, or both before continuing.</errorMessage>
+        <formulaExpression>OR(NOT(ISBLANK({!Email})), NOT(ISBLANK({!Phone})), NOT(ISBLANK({!Mobile_Phone})))</formulaExpression>
+      </validationRule>
+    </fields>
+    <fields>
+      <name>Product_Service_Interest</name>
+      <choiceReferences>ProductInterest_GC1000</choiceReferences>
+      <choiceReferences>ProductInterest_GC3000</choiceReferences>
+      <choiceReferences>ProductInterest_GC5000</choiceReferences>
+      <dataType>String</dataType>
+      <fieldText>Product/Service Interest</fieldText>
+      <fieldType>DropdownBox</fieldType>
+      <isRequired>false</isRequired>
+    </fields>
+    <fields>
+      <name>Rating</name>
+      <choiceReferences>Rating_Hot</choiceReferences>
+      <choiceReferences>Rating_Warm</choiceReferences>
+      <choiceReferences>Rating_Cold</choiceReferences>
+      <dataType>String</dataType>
+      <defaultValue>
+        <stringValue>Warm</stringValue>
+      </defaultValue>
+      <fieldText>Rating</fieldText>
+      <fieldType>DropdownBox</fieldType>
+      <isRequired>false</isRequired>
+    </fields>
+    <fields>
+      <name>Description</name>
+      <dataType>String</dataType>
+      <fieldText>Description</fieldText>
+      <fieldType>LargeTextArea</fieldType>
+      <isRequired>false</isRequired>
+    </fields>
+    <fields>
+      <name>Status</name>
+      <choiceReferences>Status_New_Not_Contacted</choiceReferences>
+      <choiceReferences>Status_Working_Contacted</choiceReferences>
+      <choiceReferences>Status_Nurturing_Contacted</choiceReferences>
+      <choiceReferences>Status_Closed_Converted</choiceReferences>
+      <choiceReferences>Status_Closed_Not_Converted</choiceReferences>
+      <dataType>String</dataType>
+      <defaultValue>
+        <stringValue>New - Not Contacted</stringValue>
+      </defaultValue>
+      <fieldText>Status</fieldText>
+      <fieldType>DropdownBox</fieldType>
+      <isRequired>true</isRequired>
+    </fields>
+    <showFooter>true</showFooter>
+    <showHeader>true</showHeader>
+  </screens>
+  <screens>
+    <name>Screen_Error</name>
+    <label>Lead Save Error</label>
+    <locationX>100</locationX>
+    <locationY>700</locationY>
+    <allowBack>true</allowBack>
+    <allowFinish>true</allowFinish>
+    <allowPause>false</allowPause>
+    <fields>
+      <name>Error_Message</name>
+      <fieldType>DisplayText</fieldType>
+      <fieldText>&lt;p&gt;&lt;b&gt;The lead could not be saved.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;{!var_ErrorMessage}&lt;/p&gt;&lt;p&gt;Use Previous to review the details, or Finish to exit.&lt;/p&gt;</fieldText>
+    </fields>
+    <showFooter>true</showFooter>
+    <showHeader>true</showHeader>
+  </screens>
+  <start>
+    <locationX>100</locationX>
+    <locationY>100</locationY>
+    <connector>
+      <targetReference>Screen_Create_Lead</targetReference>
+    </connector>
+  </start>
+  <status>Draft</status>
+  <variables>
+    <name>var_ErrorMessage</name>
+    <dataType>String</dataType>
+    <isCollection>false</isCollection>
+    <isInput>false</isInput>
+    <isOutput>false</isOutput>
+  </variables>
+</Flow>
