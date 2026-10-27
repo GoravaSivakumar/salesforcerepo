@@ -2,10 +2,10 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
   <apiVersion>65.0</apiVersion>
   <assignments>
-    <name>Handle_Create_Lead_Fault</name>
-    <label>Handle Create Lead Fault</label>
-    <locationX>100</locationX>
-    <locationY>550</locationY>
+    <name>Handle_Save_Fault</name>
+    <label>Handle Save Fault</label>
+    <locationX>400</locationX>
+    <locationY>850</locationY>
     <assignmentItems>
       <assignToReference>var_ErrorMessage</assignToReference>
       <operator>Assign</operator>
@@ -14,7 +14,7 @@
       </value>
     </assignmentItems>
     <connector>
-      <targetReference>Screen_Error</targetReference>
+      <targetReference>Screen_Save_Error</targetReference>
     </connector>
   </assignments>
   <choices>
@@ -58,7 +58,7 @@
     </value>
   </choices>
   <choices>
-    <name>ProductInterest_GC1000</name>
+    <name>ProductInterest_GC1000_Series</name>
     <choiceText>GC1000 series</choiceText>
     <dataType>String</dataType>
     <value>
@@ -66,7 +66,7 @@
     </value>
   </choices>
   <choices>
-    <name>ProductInterest_GC3000</name>
+    <name>ProductInterest_GC3000_Series</name>
     <choiceText>GC3000 series</choiceText>
     <dataType>String</dataType>
     <value>
@@ -74,7 +74,7 @@
     </value>
   </choices>
   <choices>
-    <name>ProductInterest_GC5000</name>
+    <name>ProductInterest_GC5000_Series</name>
     <choiceText>GC5000 series</choiceText>
     <dataType>String</dataType>
     <value>
@@ -145,84 +145,116 @@
       <stringValue>Working - Contacted</stringValue>
     </value>
   </choices>
-  <description>Creates a Lead from the Leads list with required Last Name and Company fields, validates that Email or Phone is provided, and applies the visible default Status and Rating values.</description>
-  <label>Create Lead From Leads List</label>
+  <decisions>
+    <name>Check_Email_Or_Phone</name>
+    <label>Check Email or Phone</label>
+    <locationX>100</locationX>
+    <locationY>550</locationY>
+    <defaultConnector>
+      <targetReference>Create_Lead</targetReference>
+    </defaultConnector>
+    <defaultConnectorLabel>Email or Phone Provided</defaultConnectorLabel>
+    <rules>
+      <name>Email_And_Phone_Missing</name>
+      <conditionLogic>and</conditionLogic>
+      <conditions>
+        <leftValueReference>Email</leftValueReference>
+        <operator>IsNull</operator>
+        <rightValue>
+          <booleanValue>true</booleanValue>
+        </rightValue>
+      </conditions>
+      <conditions>
+        <leftValueReference>Phone</leftValueReference>
+        <operator>IsNull</operator>
+        <rightValue>
+          <booleanValue>true</booleanValue>
+        </rightValue>
+      </conditions>
+      <connector>
+        <targetReference>Screen_Contact_Error</targetReference>
+      </connector>
+      <label>Email and Phone Missing</label>
+    </rules>
+  </decisions>
+  <description>Screen flow to create a Lead with required Last Name and Company, contact validation, and default Status and Rating values.</description>
+  <label>Create Lead</label>
   <processType>Flow</processType>
   <recordCreates>
     <name>Create_Lead</name>
-    <label>Create Lead</label>
+    <label>Create Lead Record</label>
     <locationX>100</locationX>
-    <locationY>400</locationY>
+    <locationY>700</locationY>
     <connector>
       <targetReference>Screen_Complete</targetReference>
     </connector>
     <faultConnector>
-      <targetReference>Handle_Create_Lead_Fault</targetReference>
+      <targetReference>Handle_Save_Fault</targetReference>
     </faultConnector>
     <inputAssignments>
       <field>FirstName</field>
       <value>
-        <elementReference>Screen_Create_Lead.First_Name</elementReference>
+        <elementReference>FirstName</elementReference>
       </value>
     </inputAssignments>
     <inputAssignments>
       <field>LastName</field>
       <value>
-        <elementReference>Screen_Create_Lead.Last_Name</elementReference>
+        <elementReference>LastName</elementReference>
       </value>
     </inputAssignments>
     <inputAssignments>
       <field>Company</field>
       <value>
-        <elementReference>Screen_Create_Lead.Company</elementReference>
+        <elementReference>Company</elementReference>
       </value>
     </inputAssignments>
     <inputAssignments>
       <field>Email</field>
       <value>
-        <elementReference>Screen_Create_Lead.Email</elementReference>
+        <elementReference>Email</elementReference>
       </value>
     </inputAssignments>
     <inputAssignments>
       <field>LeadSource</field>
       <value>
-        <elementReference>Screen_Create_Lead.Lead_Source</elementReference>
+        <elementReference>LeadSource</elementReference>
       </value>
     </inputAssignments>
     <inputAssignments>
       <field>MobilePhone</field>
       <value>
-        <elementReference>Screen_Create_Lead.Mobile_Phone</elementReference>
+        <elementReference>MobilePhone</elementReference>
       </value>
     </inputAssignments>
     <inputAssignments>
       <field>Phone</field>
       <value>
-        <elementReference>Screen_Create_Lead.Phone</elementReference>
+        <elementReference>Phone</elementReference>
       </value>
     </inputAssignments>
     <inputAssignments>
       <field>ProductInterest__c</field>
       <value>
-        <elementReference>Screen_Create_Lead.Product_Service_Interest</elementReference>
+        <elementReference>ProductInterest</elementReference>
       </value>
     </inputAssignments>
     <inputAssignments>
       <field>Rating</field>
       <value>
-        <elementReference>Screen_Create_Lead.Rating</elementReference>
+        <elementReference>Rating</elementReference>
       </value>
     </inputAssignments>
     <inputAssignments>
       <field>Description</field>
       <value>
-        <elementReference>Screen_Create_Lead.Description</elementReference>
+        <elementReference>Description</elementReference>
       </value>
     </inputAssignments>
     <inputAssignments>
       <field>Status</field>
       <value>
-        <elementReference>Screen_Create_Lead.Status</elementReference>
+        <elementReference>Status</elementReference>
       </value>
     </inputAssignments>
     <object>Lead</object>
@@ -233,14 +265,33 @@
     <name>Screen_Complete</name>
     <label>Lead Created</label>
     <locationX>100</locationX>
-    <locationY>550</locationY>
+    <locationY>850</locationY>
     <allowBack>false</allowBack>
     <allowFinish>true</allowFinish>
     <allowPause>false</allowPause>
     <fields>
       <name>Complete_Message</name>
       <fieldType>DisplayText</fieldType>
-      <fieldText>&lt;p&gt;&lt;b&gt;Lead created successfully.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Finish this flow to close it and return to the Leads list.&lt;/p&gt;</fieldText>
+      <fieldText>&lt;p&gt;&lt;b&gt;Lead created successfully.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Click &lt;b&gt;Finish&lt;/b&gt; to close this flow.&lt;/p&gt;</fieldText>
+    </fields>
+    <showFooter>true</showFooter>
+    <showHeader>true</showHeader>
+  </screens>
+  <screens>
+    <name>Screen_Contact_Error</name>
+    <label>Contact Information Required</label>
+    <locationX>250</locationX>
+    <locationY>700</locationY>
+    <allowBack>false</allowBack>
+    <allowFinish>false</allowFinish>
+    <allowPause>false</allowPause>
+    <connector>
+      <targetReference>Screen_Create_Lead</targetReference>
+    </connector>
+    <fields>
+      <name>Contact_Error_Message</name>
+      <fieldType>DisplayText</fieldType>
+      <fieldText>&lt;p&gt;&lt;b&gt;Enter an Email address or Phone number to continue.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Mobile Phone by itself does not meet this requirement. Return to the form and provide Email, Phone, or both.&lt;/p&gt;</fieldText>
     </fields>
     <showFooter>true</showFooter>
     <showHeader>true</showHeader>
@@ -249,32 +300,25 @@
     <name>Screen_Create_Lead</name>
     <label>Create Lead Details</label>
     <locationX>100</locationX>
-    <locationY>250</locationY>
-    <allowBack>false</allowBack>
-    <allowFinish>true</allowFinish>
+    <locationY>400</locationY>
+    <allowBack>true</allowBack>
+    <allowFinish>false</allowFinish>
     <allowPause>false</allowPause>
     <connector>
-      <targetReference>Create_Lead</targetReference>
+      <targetReference>Check_Email_Or_Phone</targetReference>
     </connector>
     <fields>
-      <name>Lead_Instructions</name>
-      <fieldType>DisplayText</fieldType>
-      <fieldText>&lt;p&gt;Enter the lead details. Last Name and Company are required. Provide an Email address, a Phone number, or both.&lt;/p&gt;</fieldText>
-    </fields>
-    <fields>
-      <name>First_Name</name>
+      <name>FirstName</name>
       <dataType>String</dataType>
       <fieldText>First Name</fieldText>
       <fieldType>InputField</fieldType>
-      <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
       <isRequired>false</isRequired>
     </fields>
     <fields>
-      <name>Last_Name</name>
+      <name>LastName</name>
       <dataType>String</dataType>
       <fieldText>Last Name</fieldText>
       <fieldType>InputField</fieldType>
-      <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
       <isRequired>true</isRequired>
     </fields>
     <fields>
@@ -282,7 +326,6 @@
       <dataType>String</dataType>
       <fieldText>Company</fieldText>
       <fieldType>InputField</fieldType>
-      <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
       <isRequired>true</isRequired>
     </fields>
     <fields>
@@ -290,11 +333,14 @@
       <dataType>String</dataType>
       <fieldText>Email</fieldText>
       <fieldType>InputField</fieldType>
-      <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
       <isRequired>false</isRequired>
+      <validationRule>
+        <errorMessage>Enter a valid email address, or leave Email blank and provide Phone.</errorMessage>
+        <formulaExpression>OR(ISBLANK({!Email}), REGEX({!Email}, "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"))</formulaExpression>
+      </validationRule>
     </fields>
     <fields>
-      <name>Lead_Source</name>
+      <name>LeadSource</name>
       <choiceReferences>LeadSource_Web</choiceReferences>
       <choiceReferences>LeadSource_Phone_Inquiry</choiceReferences>
       <choiceReferences>LeadSource_Partner_Referral</choiceReferences>
@@ -306,11 +352,10 @@
       <isRequired>false</isRequired>
     </fields>
     <fields>
-      <name>Mobile_Phone</name>
+      <name>MobilePhone</name>
       <dataType>String</dataType>
       <fieldText>Mobile Phone</fieldText>
       <fieldType>InputField</fieldType>
-      <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
       <isRequired>false</isRequired>
     </fields>
     <fields>
@@ -318,18 +363,13 @@
       <dataType>String</dataType>
       <fieldText>Phone</fieldText>
       <fieldType>InputField</fieldType>
-      <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
       <isRequired>false</isRequired>
-      <validationRule>
-        <errorMessage>Enter an Email address, a Phone number, or both before continuing.</errorMessage>
-        <formulaExpression>OR(NOT(ISBLANK({!Email})), NOT(ISBLANK({!Phone})), NOT(ISBLANK({!Mobile_Phone})))</formulaExpression>
-      </validationRule>
     </fields>
     <fields>
-      <name>Product_Service_Interest</name>
-      <choiceReferences>ProductInterest_GC1000</choiceReferences>
-      <choiceReferences>ProductInterest_GC3000</choiceReferences>
-      <choiceReferences>ProductInterest_GC5000</choiceReferences>
+      <name>ProductInterest</name>
+      <choiceReferences>ProductInterest_GC1000_Series</choiceReferences>
+      <choiceReferences>ProductInterest_GC5000_Series</choiceReferences>
+      <choiceReferences>ProductInterest_GC3000_Series</choiceReferences>
       <dataType>String</dataType>
       <fieldText>Product/Service Interest</fieldText>
       <fieldType>DropdownBox</fieldType>
@@ -374,17 +414,36 @@
     <showHeader>true</showHeader>
   </screens>
   <screens>
-    <name>Screen_Error</name>
+    <name>Screen_Save_Error</name>
     <label>Lead Save Error</label>
-    <locationX>100</locationX>
-    <locationY>700</locationY>
-    <allowBack>true</allowBack>
+    <locationX>400</locationX>
+    <locationY>1000</locationY>
+    <allowBack>false</allowBack>
     <allowFinish>true</allowFinish>
     <allowPause>false</allowPause>
     <fields>
-      <name>Error_Message</name>
+      <name>Save_Error_Message</name>
       <fieldType>DisplayText</fieldType>
-      <fieldText>&lt;p&gt;&lt;b&gt;The lead could not be saved.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;{!var_ErrorMessage}&lt;/p&gt;&lt;p&gt;Use Previous to review the details, or Finish to exit.&lt;/p&gt;</fieldText>
+      <fieldText>&lt;p&gt;&lt;b&gt;The Lead could not be saved.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;{!var_ErrorMessage}&lt;/p&gt;&lt;p&gt;Click &lt;b&gt;Finish&lt;/b&gt; to close this flow.&lt;/p&gt;</fieldText>
+    </fields>
+    <showFooter>true</showFooter>
+    <showHeader>true</showHeader>
+  </screens>
+  <screens>
+    <name>Screen_Welcome</name>
+    <label>Create Lead</label>
+    <locationX>100</locationX>
+    <locationY>250</locationY>
+    <allowBack>false</allowBack>
+    <allowFinish>false</allowFinish>
+    <allowPause>false</allowPause>
+    <connector>
+      <targetReference>Screen_Create_Lead</targetReference>
+    </connector>
+    <fields>
+      <name>Welcome_Message</name>
+      <fieldType>DisplayText</fieldType>
+      <fieldText>&lt;p&gt;&lt;b style="font-size: 18px;"&gt;Create a Lead&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Enter the Lead details. Last Name and Company are required. Provide an Email address, Phone number, or both; Mobile Phone alone does not satisfy the contact requirement.&lt;/p&gt;</fieldText>
     </fields>
     <showFooter>true</showFooter>
     <showHeader>true</showHeader>
@@ -393,7 +452,7 @@
     <locationX>100</locationX>
     <locationY>100</locationY>
     <connector>
-      <targetReference>Screen_Create_Lead</targetReference>
+      <targetReference>Screen_Welcome</targetReference>
     </connector>
   </start>
   <status>Draft</status>
