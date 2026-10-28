@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+  <apiVersion>65.0</apiVersion>
+  <assignments>
+    <name>Handle_Create_Lead_Error</name>
+    <label>Handle Create Lead Error</label>
+    <locationX>300</locationX>
+    <locationY>550</locationY>
+    <assignmentItems>
+      <assignToReference>var_ErrorMessage</assignToReference>
+      <operator>Assign</operator>
+      <value>
+        <elementReference>$Flow.FaultMessage</elementReference>
+      </value>
+    </assignmentItems>
+    <connector>
+      <targetReference>Screen_Error</targetReference>
+    </connector>
+  </assignments>
+  <description>Creates a Lead from the Create Lead form, including the optional Number of Employees value. Ticket LEAD-EMP-20261028-02.</description>
+  <label>Add No. of Employees to the Create Lead Form</label>
+  <processType>Flow</processType>
+  <recordCreates>
+    <name>Create_Lead</name>
+    <label>Create Lead</label>
+    <locationX>100</locationX>
+    <locationY>400</locationY>
+    <connector>
+      <targetReference>Screen_Complete</targetReference>
+    </connector>
+    <faultConnector>
+      <targetReference>Handle_Create_Lead_Error</targetReference>
+    </faultConnector>
+    <inputAssignments>
+      <field>LastName</field>
+      <value>
+        <elementReference>Lead_Last_Name</elementReference>
+      </value>
+    </inputAssignments>
+    <inputAssignments>
+      <field>Company</field>
+      <value>
+        <elementReference>Lead_Company</elementReference>
+      </value>
+    </inputAssignments>
+    <inputAssignments>
+      <field>NumberOfEmployees</field>
+      <value>
+        <elementReference>Lead_Number_Of_Employees</elementReference>
+      </value>
+    </inputAssignments>
+    <inputAssignments>
+      <field>Status</field>
+      <value>
+        <stringValue>New - Not Contacted</stringValue>
+      </value>
+    </inputAssignments>
+    <object>Lead</object>
+    <storeOutputAutomatically>true</storeOutputAutomatically>
+  </recordCreates>
+  <runInMode>DefaultMode</runInMode>
+  <screens>
+    <name>Screen_Lead_Details</name>
+    <label>Create Lead Details</label>
+    <locationX>100</locationX>
+    <locationY>250</locationY>
+    <allowBack>false</allowBack>
+    <allowFinish>false</allowFinish>
+    <allowPause>false</allowPause>
+    <connector>
+      <targetReference>Create_Lead</targetReference>
+    </connector>
+    <fields>
+      <name>Lead_Form_Instructions</name>
+      <fieldType>DisplayText</fieldType>
+      <fieldText>&lt;p&gt;Enter the required lead details. No. of Employees is optional.&lt;/p&gt;</fieldText>
+    </fields>
+    <fields>
+      <name>Lead_Last_Name</name>
+      <dataType>String</dataType>
+      <fieldText>Last Name</fieldText>
+      <fieldType>InputField</fieldType>
+      <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+      <isRequired>true</isRequired>
+    </fields>
+    <fields>
+      <name>Lead_Company</name>
+      <dataType>String</dataType>
+      <fieldText>Company</fieldText>
+      <fieldType>InputField</fieldType>
+      <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+      <isRequired>true</isRequired>
+    </fields>
+    <fields>
+      <name>Lead_Number_Of_Employees</name>
+      <dataType>Number</dataType>
+      <fieldText>No. of Employees</fieldText>
+      <fieldType>InputField</fieldType>
+      <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+      <isRequired>false</isRequired>
+      <scale>0</scale>
+    </fields>
+    <showFooter>true</showFooter>
+    <showHeader>true</showHeader>
+  </screens>
+  <screens>
+    <name>Screen_Complete</name>
+    <label>Lead Created</label>
+    <locationX>100</locationX>
+    <locationY>550</locationY>
+    <allowBack>false</allowBack>
+    <allowFinish>true</allowFinish>
+    <allowPause>false</allowPause>
+    <fields>
+      <name>Complete_Message</name>
+      <fieldType>DisplayText</fieldType>
+      <fieldText>&lt;p&gt;&lt;b&gt;Lead created successfully.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Click &lt;b&gt;Finish&lt;/b&gt; to close this form.&lt;/p&gt;</fieldText>
+    </fields>
+    <showFooter>true</showFooter>
+    <showHeader>true</showHeader>
+  </screens>
+  <screens>
+    <name>Screen_Error</name>
+    <label>Lead Creation Error</label>
+    <locationX>300</locationX>
+    <locationY>700</locationY>
+    <allowBack>false</allowBack>
+    <allowFinish>true</allowFinish>
+    <allowPause>false</allowPause>
+    <fields>
+      <name>Error_Message</name>
+      <fieldType>DisplayText</fieldType>
+      <fieldText>&lt;p&gt;The lead could not be created:&lt;/p&gt;&lt;p&gt;&lt;i&gt;{!var_ErrorMessage}&lt;/i&gt;&lt;/p&gt;&lt;p&gt;Click &lt;b&gt;Finish&lt;/b&gt; to close this form.&lt;/p&gt;</fieldText>
+    </fields>
+    <showFooter>true</showFooter>
+    <showHeader>true</showHeader>
+  </screens>
+  <start>
+    <locationX>100</locationX>
+    <locationY>100</locationY>
+    <connector>
+      <targetReference>Screen_Lead_Details</targetReference>
+    </connector>
+  </start>
+  <status>Draft</status>
+  <variables>
+    <name>var_ErrorMessage</name>
+    <dataType>String</dataType>
+    <isCollection>false</isCollection>
+    <isInput>false</isInput>
+    <isOutput>false</isOutput>
+  </variables>
+</Flow>
