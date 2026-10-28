@@ -3,7 +3,7 @@
     <actionOnInsert>Allow</actionOnInsert>
     <actionOnUpdate>Allow</actionOnUpdate>
     <alertText>A lead or contact with this email address already exists. Review the existing record before continuing.</alertText>
-    <description>Warns on Lead create or email change when another Lead or Contact has the same email address. Exact match, case-insensitive, leading/trailing spaces ignored. Blank email not matched.</description>
+    <description>Warns when a Lead&apos;s email matches another Lead or Contact by email. Allows save.</description>
     <duplicateRuleFilter xsi:nil="true"/>
     <duplicateRuleMatchRules>
         <matchRuleSObjectType>Lead</matchRuleSObjectType>
