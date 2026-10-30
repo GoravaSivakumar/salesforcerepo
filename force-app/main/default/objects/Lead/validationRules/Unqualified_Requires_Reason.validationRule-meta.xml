@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unqualified_Requires_Reason</fullName>
+    <active>true</active>
+    <description>An unsuitable enquiry (status Unqualified) must record why it was disqualified.</description>
+    <errorConditionFormula>AND(ISPICKVAL(Status, "Unqualified"), ISPICKVAL(Disqualification_Reason__c, ""))</errorConditionFormula>
+    <errorDisplayField>Disqualification_Reason__c</errorDisplayField>
+    <errorMessage>A Disqualification Reason is required before a lead can be saved with the Unqualified status.</errorMessage>
+</ValidationRule>

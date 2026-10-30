@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nurturing_Requires_Follow_Up_Date</fullName>
+    <active>true</active>
+    <description>A lead that needs more time (status Nurturing) must carry the date the rep will revisit it, so nurturing leads cannot go stale.</description>
+    <errorConditionFormula>AND(ISPICKVAL(Status, "Nurturing"), ISBLANK(Next_Follow_Up_Date__c))</errorConditionFormula>
+    <errorDisplayField>Next_Follow_Up_Date__c</errorDisplayField>
+    <errorMessage>A Next Follow-Up Date is required before a lead can be saved with the Nurturing status.</errorMessage>
+</ValidationRule>
