@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unqualified_Requires_Reason</fullName>
+    <active>true</active>
+    <description>A lead that is disqualified must record why it is no longer being pursued.</description>
+    <errorConditionFormula>AND(
+    ISPICKVAL(Status, "Unqualified"),
+    ISBLANK(TEXT(Disqualification_Reason__c))
+)</errorConditionFormula>
+    <errorDisplayField>Disqualification_Reason__c</errorDisplayField>
+    <errorMessage>Please select a Disqualification Reason when the lead status is Unqualified.</errorMessage>
+</ValidationRule>

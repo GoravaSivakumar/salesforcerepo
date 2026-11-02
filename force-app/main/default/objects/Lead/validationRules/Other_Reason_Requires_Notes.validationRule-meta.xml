@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Other_Reason_Requires_Notes</fullName>
+    <active>true</active>
+    <description>Choosing Other as the disqualification reason requires an explanation.</description>
+    <errorConditionFormula>AND(
+    ISPICKVAL(Disqualification_Reason__c, "Other"),
+    ISBLANK(Disqualification_Notes__c)
+)</errorConditionFormula>
+    <errorDisplayField>Disqualification_Notes__c</errorDisplayField>
+    <errorMessage>Please provide Disqualification Notes when the disqualification reason is Other.</errorMessage>
+</ValidationRule>
