@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="Case Review" icon-name="standard:case">
+        <div class="slds-p-around_medium">
+            <template lwc:if={isLoading}>
+                <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+            </template>
+
+            <template lwc:else>
+                <template lwc:if={caseRecord}>
+                    <p class="slds-text-title">Case Number</p>
+                    <p class="slds-text-heading_small slds-m-bottom_small">{caseRecord.CaseNumber}</p>
+
+                    <p class="slds-text-title">Escalation Status</p>
+                    <p class="slds-m-bottom_small">{escalationStatus}</p>
+                </template>
+
+                <template lwc:if={hasErrors}>
+                    <div class="slds-notify slds-notify_alert slds-theme_error" role="alert">
+                        <span>Escalation is currently blocked:</span>
+                        <ul>
+                            <template for:each={validation.errors} for:item="err">
+                                <li key={err}>{err}</li>
+                            </template>
+                        </ul>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>
