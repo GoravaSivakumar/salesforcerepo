@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Qualified_Requires_Fields</fullName>
+    <active>true</active>
+    <description>Requires Customer Need and Purchase Timeframe be entered and Qualification Outcome be &apos;Meets Criteria&apos; when Status is Qualified.</description>
+    <errorConditionFormula>AND(
+        ISPICKVAL(Status, &quot;Qualified&quot;),
+        OR(
+            ISBLANK(Customer_Need__c),
+            ISPICKVAL(Purchase_Timeframe__c, &quot;&quot;),
+            NOT(ISPICKVAL(Qualification_Outcome__c, &quot;Meets Criteria&quot;))
+        )
+    )</errorConditionFormula>
+    <errorMessage>When Status is Qualified, Customer Need and Purchase Timeframe must be completed, and Qualification Outcome must be &apos;Meets Criteria&apos;.</errorMessage>
+</ValidationRule>

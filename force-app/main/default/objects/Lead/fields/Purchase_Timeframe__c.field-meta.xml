@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Purchase_Timeframe__c</fullName>
+    <description>Expected purchase timeframe captured from the customer during lead qualification. Required (together with Customer Need and a Qualification Outcome of &apos;Meets Criteria&apos;) before a lead can be set to Qualified.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Select when the customer expects to buy: Within 3 Months, 3&ndash;6 Months, More Than 6 Months, or Unknown.</inlineHelpText>
+    <label>Purchase Timeframe</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Within 3 Months</fullName>
+                <default>false</default>
+                <label>Within 3 Months</label>
+            </value>
+            <value>
+                <fullName>3–6 Months</fullName>
+                <default>false</default>
+                <label>3–6 Months</label>
+            </value>
+            <value>
+                <fullName>More Than 6 Months</fullName>
+                <default>false</default>
+                <label>More Than 6 Months</label>
+            </value>
+            <value>
+                <fullName>Unknown</fullName>
+                <default>false</default>
+                <label>Unknown</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
