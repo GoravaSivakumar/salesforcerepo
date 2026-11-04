@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Other_Requires_Notes</fullName>
+    <active>true</active>
+    <description>Require explanatory notes in Nurturing_Notes__c when Lead Status is Other.</description>
+    <errorConditionFormula>AND(
+            ISPICKVAL(Status, &quot;Other&quot;),
+            ISBLANK(Nurturing_Notes__c)
+        )</errorConditionFormula>
+    <errorDisplayField>Nurturing_Notes__c</errorDisplayField>
+    <errorMessage>Explanatory notes are required when Status is Other.</errorMessage>
+</ValidationRule>
