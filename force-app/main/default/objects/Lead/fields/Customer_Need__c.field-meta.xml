@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Need__c</fullName>
+    <description>The customer&apos;s requirement as captured by the sales representative during lead qualification. Required, together with Purchase Timeframe and a Qualification Outcome of &apos;Meets Criteria&apos;, before a lead can be set to Qualified.</description>
+    <inlineHelpText>Summarize what the customer needs (product, scope, or problem to solve). This is required before the lead can be marked Qualified.</inlineHelpText>
+    <label>Customer Need</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>TextArea</type>
+</CustomField>

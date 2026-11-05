@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Qualification_Outcome__c</fullName>
+    <description>Result of the lead qualification assessment. A lead can only be set to Qualified when the outcome is &apos;Meets Criteria&apos;.</description>
+    <inlineHelpText>Choose Meets Criteria only when the lead is ready for sales follow-up; Does Not Meet Criteria or Needs Further Review cannot be saved with a Qualified status.</inlineHelpText>
+    <label>Qualification Outcome</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Meets Criteria</fullName>
+                <default>false</default>
+                <label>Meets Criteria</label>
+            </value>
+            <value>
+                <fullName>Does Not Meet Criteria</fullName>
+                <default>false</default>
+                <label>Does Not Meet Criteria</label>
+            </value>
+            <value>
+                <fullName>Needs Further Review</fullName>
+                <default>false</default>
+                <label>Needs Further Review</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
